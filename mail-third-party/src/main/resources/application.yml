@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: mail-third-party
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    alicloud:
+      access-key: LTAI5tQ6hETiX88QMk2pfV5v
+      secret-key: RPfROh4qL8EGirBBh4zFw6E5EVsvbs
+      oss:
+        endpoint: oss-cn-beijing.aliyuncs.com
+      bucket: mymail-peigen
+
+server:
+  port: 30000

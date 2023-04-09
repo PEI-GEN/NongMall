@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: mail-third-party
+
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        namespace: 7d55560b-5e49-4f79-b671-f062e7037826
+
+
