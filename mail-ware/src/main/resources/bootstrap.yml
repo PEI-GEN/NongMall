@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: mail-ware
+
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        namespace: a38550a4-698c-48c5-a3b2-9f89a1c9bf6c
+
+

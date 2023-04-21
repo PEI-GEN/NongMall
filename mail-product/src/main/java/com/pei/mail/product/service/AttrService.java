@@ -51,5 +51,6 @@ public interface AttrService extends IService<AttrEntity> {
 
     void updateAttr(AttrVo attr);
 
+    List<Long> selectSearchAttrIds(List<Long> attrIds);
 }
 

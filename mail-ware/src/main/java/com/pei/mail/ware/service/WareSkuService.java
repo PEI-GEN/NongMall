@@ -3,7 +3,9 @@ package com.pei.mail.ware.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.pei.common.utils.PageUtils;
 import com.pei.mail.ware.entity.WareSkuEntity;
+import com.pei.mail.ware.vo.SkuHasStockVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,5 +18,9 @@ import java.util.Map;
 public interface WareSkuService extends IService<WareSkuEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    void addStock(Long skuId, Long wareId, Integer skuNum);
+
+    List<SkuHasStockVo> getSkuHasStock(List<Long> skuIds);
 }
 
