@@ -1,4 +1,4 @@
-package com.xunqi.gulimall.ware.vo;
+package com.pei.mail.ware.vo;
 
 import lombok.Data;
 
