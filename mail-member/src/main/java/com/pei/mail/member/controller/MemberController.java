@@ -3,7 +3,13 @@ package com.pei.mail.member.controller;
 import java.util.Arrays;
 import java.util.Map;
 
+import com.pei.common.exception.BizCodeEnum;
+import com.pei.mail.member.exception.PhoneException;
+import com.pei.mail.member.exception.UsernameException;
 import com.pei.mail.member.feign.CouponFeignService;
+import com.pei.mail.member.vo.MemberUserLoginVo;
+import com.pei.mail.member.vo.MemberUserRegisterVo;
+import com.pei.mail.member.vo.SocialUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +35,62 @@ public class MemberController {
 
     @Autowired
     CouponFeignService couponFeignService;
+
+
+    /**
+     * 微博登录
+     * @param socialUser
+     * @return
+     * @throws Exception
+     */
+    @PostMapping(value = "/oauth2/login")
+    public R oauthLogin(@RequestBody SocialUser socialUser) throws Exception {
+
+        MemberEntity memberEntity = memberService.login(socialUser);
+
+        if (memberEntity != null) {
+            return R.ok().setData(memberEntity);
+        } else {
+            return R.error(BizCodeEnum.LOGINACCT_PASSWORD_EXCEPTION.getCode(),BizCodeEnum.LOGINACCT_PASSWORD_EXCEPTION.getMessage());
+        }
+    }
+
+    /**
+     * 注册功能
+     * @param vo
+     * @return
+     */
+    @PostMapping(value = "/register")
+    public R register(@RequestBody MemberUserRegisterVo vo) {
+
+        try {
+            memberService.register(vo);
+        } catch (PhoneException e) {
+            return R.error(BizCodeEnum.PHONE_EXIST_EXCEPTION.getCode(),BizCodeEnum.PHONE_EXIST_EXCEPTION.getMessage());
+        } catch (UsernameException e) {
+            return R.error(BizCodeEnum.USER_EXIST_EXCEPTION.getCode(),BizCodeEnum.USER_EXIST_EXCEPTION.getMessage());
+        }
+
+        return R.ok();
+    }
+
+    /**
+     * 登录功能
+     * @param vo
+     * @return
+     */
+    @PostMapping(value = "/login")
+    public R login(@RequestBody MemberUserLoginVo vo) {
+//        System.out.println(1);
+
+        MemberEntity memberEntity = memberService.login(vo);
+
+        if (memberEntity != null) {
+            return R.ok().setData(memberEntity);
+        } else {
+            return R.error(BizCodeEnum.LOGINACCT_PASSWORD_EXCEPTION.getCode(),BizCodeEnum.LOGINACCT_PASSWORD_EXCEPTION.getMessage());
+        }
+    }
 
     @RequestMapping("/coupons")
     public R test(){

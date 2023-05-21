@@ -74,16 +74,20 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
 
 
     @Override
-    public PageUtils queryBaseAttrPage(Map<String, Object> params, Long catelogId, String type) {
-        QueryWrapper<AttrEntity> queryWrapper = new QueryWrapper<AttrEntity>().eq("attr_type","base".equalsIgnoreCase(type)?1:0);
+    public PageUtils queryBaseAttrPage(Map<String, Object> params, Long catelogId, String attrType) {
+        QueryWrapper<AttrEntity> queryWrapper = new QueryWrapper<AttrEntity>()
+                .eq("attr_type","base".equalsIgnoreCase(attrType) ?
+                        ProductConstant.AttrEnum.ATTR_TYPE_BASE.getCode() : ProductConstant.AttrEnum.ATTR_TYPE_SALE.getCode());
 
-        if(catelogId!=0){
-            queryWrapper.eq("catelogId",catelogId);
+        //根据catelogId查询信息
+        if (catelogId != 0) {
+            queryWrapper.eq("catelog_id",catelogId);
         }
 
-        String key=(String) params.get("key");
-        if(!StringUtils.isEmpty(key)){
-            queryWrapper.and((wrapper)->{
+        String key = (String) params.get("key");
+        if (!StringUtils.isEmpty(key)) {
+            //attr_id attr_name
+            queryWrapper.and((wrapper) -> {
                 wrapper.eq("attr_id",key).or().like("attr_name",key);
             });
         }
@@ -94,26 +98,34 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
         );
 
         PageUtils pageUtils = new PageUtils(page);
-        List<AttrEntity> records=page.getRecords();
+        List<AttrEntity> records = page.getRecords();
 
-        List<AttrRespVo> respVos=records.stream().map((attrEntity) -> {
-            AttrRespVo attrRespVo=new AttrRespVo();
-            BeanUtils.copyProperties(attrEntity,attrRespVo);
-            if("base".equalsIgnoreCase(type)){
-                //设置分类和分组的名字
-                AttrAttrgroupRelationEntity attrId=relationDao.selectOne(new QueryWrapper<AttrAttrgroupRelationEntity>().eq("attr_id",attrEntity.getAttrId()));
-                if(attrId!=null&&attrId.getAttrGroupId()!=null){
-                    AttrGroupEntity attrGroupEntity = attrGroupDao.selectById(attrId.getAttrGroupId());
-                    attrRespVo.setGroupName(attrGroupEntity.getAttrGroupName());
-                }
+        List<AttrRespVo> respVos = records.stream().map((attrEntity) -> {
+            AttrRespVo attrRespVo = new AttrRespVo();
+            BeanUtils.copyProperties(attrEntity, attrRespVo);
+
+            //设置分类和分组的名字
+//            if ("base".equalsIgnoreCase(attrType)) {
+//                AttrAttrgroupRelationEntity relationEntity =
+//                        relationDao.selectOne(new QueryWrapper<AttrAttrgroupRelationEntity>().eq("attr_id",attrEntity.getAttrId()));
+//                if (relationEntity != null && relationEntity.getAttrGroupId() != null) {
+//                    AttrGroupEntity attrGroupEntity = attrGroupDao.selectById(relationEntity.getAttrGroupId());
+//                    attrRespVo.setGroupName(attrGroupEntity.getAttrGroupName());
+//                }
+//
+//            }
+
+            AttrAttrgroupRelationEntity attrId = relationDao.selectOne(new QueryWrapper<AttrAttrgroupRelationEntity>().eq("attr_id", attrEntity.getAttrId()));
+            if(attrId!=null){
+                AttrGroupEntity attrGroupEntity = attrGroupDao.selectById(attrId.getAttrGroupId());
+                attrRespVo.setGroupName(attrGroupEntity.getAttrGroupName());
             }
-
 
             CategoryEntity categoryEntity = categoryDao.selectById(attrEntity.getCatelogId());
-            if(categoryEntity!=null){
+            if (categoryEntity != null) {
                 attrRespVo.setCatelogName(categoryEntity.getName());
-            }
 
+            }
             return attrRespVo;
         }).collect(Collectors.toList());
 

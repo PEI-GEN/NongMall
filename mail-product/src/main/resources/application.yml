@@ -13,11 +13,22 @@ spring:
 
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
+
   thymeleaf:
     cache: false
+
   redis:
     host: 192.168.121.128
     port: 6379
+
+  cache:
+    type: redis
+    redis:
+      time-to-live: 3600000
+      cache-null-values: true
+      use-key-prefix: true
+  session:
+    store-type: redis
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
@@ -36,5 +47,16 @@ logging:
   level:
     com.xunqi.gulimall: error
     com.alibaba.nacos.client.naming: error
+
+#线程配置
+mymail:
+  thread:
+    core-size: 20
+    max-size: 200
+    keep-alive-time: 10
+
+
+
+
 
 

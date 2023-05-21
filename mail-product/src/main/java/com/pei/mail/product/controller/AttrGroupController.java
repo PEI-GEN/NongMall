@@ -116,6 +116,28 @@ public class AttrGroupController {
     }
 
     /**
+     * 修改
+     */
+    @RequestMapping("/update")
+    //@RequiresPermissions("product:attrgroup:update")
+    public R update(@RequestBody AttrGroupEntity attrGroup){
+        attrGroupService.updateById(attrGroup);
+
+        return R.ok();
+    }
+
+    /**
+     * 删除
+     */
+    @RequestMapping("/delete")
+    //@RequiresPermissions("product:attrgroup:delete")
+    public R delete(@RequestBody Long[] attrGroupIds){
+        attrGroupService.removeByIds(Arrays.asList(attrGroupIds));
+
+        return R.ok();
+    }
+
+    /**
      * 移除
      */
     ///product/attrgroup/attr/relation/delete

@@ -43,7 +43,18 @@ spring:
         - id: mail_host_route
           uri: lb://mail-product
           predicates:
-            - Host=**.mymail.com
+            - Host=mymail.com,item.mymail.com
+
+        - id: mail_search_route
+          uri: lb://mail-search
+          predicates:
+            - Host=search.mymail.com
+
+
+        - id: mail_auth_route
+          uri: lb://mail-auth-server
+          predicates:
+            - Host=auth.mymail.com
 
 
     nacos:

@@ -5,6 +5,7 @@ import com.pei.common.utils.PageUtils;
 import com.pei.mail.product.entity.SkuInfoEntity;
 import com.pei.mail.product.entity.SpuInfoDescEntity;
 import com.pei.mail.product.entity.SpuInfoEntity;
+import com.pei.mail.product.vo.SkuItemVo;
 import com.pei.mail.product.vo.SpuSaveVo;
 
 import java.util.List;
@@ -30,5 +31,7 @@ public interface SkuInfoService extends IService<SkuInfoEntity> {
     PageUtils queryPageByCondition(Map<String, Object> params);
 
     List<SkuInfoEntity> getSkusBySpuId(Long spuId);
+
+    SkuItemVo item(Long skuId);
 }
 

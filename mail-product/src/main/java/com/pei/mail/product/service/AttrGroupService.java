@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.pei.common.utils.PageUtils;
 import com.pei.mail.product.entity.AttrGroupEntity;
 import com.pei.mail.product.vo.AttrGroupWithAttrsVo;
+import com.pei.mail.product.vo.SpuItemAttrGroupVo;
 //import com.pei.mail.product.vo.AttrGroupWithAttrsVo;
 //import com.pei.mail.product.vo.SpuItemAttrGroupVo;
 
@@ -24,5 +25,7 @@ public interface AttrGroupService extends IService<AttrGroupEntity> {
     PageUtils queryPage(Map<String, Object> params, Long catelogId);
 
     List<AttrGroupWithAttrsVo> getAttrGroupWithAttrsByCatelogId(Long catelogId);
+
+    List<SpuItemAttrGroupVo> getAttrGroupWithAttrsBySpuId(Long spuId, Long catalogId);
 }
 

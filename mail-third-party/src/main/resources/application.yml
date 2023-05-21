@@ -11,6 +11,10 @@ spring:
       oss:
         endpoint: oss-cn-beijing.aliyuncs.com
       bucket: mymail-peigen
+      sms:
+        host: http://gyytz.market.alicloudapi.com
+        path: /sms/smsSend
+        appcode: 764f82d7443540bda2873ca243f8fc98
 
 server:
   port: 30000
