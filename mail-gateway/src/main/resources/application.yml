@@ -2,6 +2,7 @@ spring:
   cloud:
     gateway:
       routes:
+
         - id: third_party_route
           uri: lb://mail-third-party
           predicates:
@@ -14,6 +15,13 @@ spring:
           uri: lb://mail-member
           predicates:
             - Path=/api/member/**
+          filters:
+            - RewritePath=/api/?(?<segment>.*),/$\{segment}
+
+        - id: coupon_route
+          uri: lb://mail-coupon
+          predicates:
+            - Path=/api/coupon/**
           filters:
             - RewritePath=/api/?(?<segment>.*),/$\{segment}
 
@@ -56,6 +64,28 @@ spring:
           predicates:
             - Host=auth.mymail.com
 
+
+        - id: mail_cart_route
+          uri: lb://mail-cart
+          predicates:
+            - Host=cart.mymail.com
+
+
+        - id: mail_order_route
+          uri: lb://mail-order
+          predicates:
+            - Host=order.mymail.com
+
+
+        - id: mail_member_route
+          uri: lb://mail-member
+          predicates:
+            - Host=member.mymail.com
+
+        - id: mail_seckill_route
+          uri: lb://mail-seckill
+          predicates:
+            - Host=seckill.mymail.com
 
     nacos:
       discovery:

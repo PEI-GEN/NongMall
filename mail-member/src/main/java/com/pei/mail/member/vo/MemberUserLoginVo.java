@@ -5,7 +5,7 @@ import lombok.Data;
 /**
  * @Description:
  * @Created: with IntelliJ IDEA.
- * @author: 夏沫止水
+ * @author: PEIGEN
  * @createTime: 2020-06-27 19:29
  **/
 
@@ -15,5 +15,7 @@ public class MemberUserLoginVo {
     private String loginacct;
 
     private String password;
+
+
 
 }

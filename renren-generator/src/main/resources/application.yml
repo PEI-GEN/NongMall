@@ -7,7 +7,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     #MySQL配置
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.121.128:3306/mail_pms?useUnicode=true&characterEncoding=UTF-8&useSSL=false&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://192.168.121.128:3306/gulimall_pms?useUnicode=true&characterEncoding=UTF-8&useSSL=false&useSSL=false&serverTimezone=UTC
     username: root
     password: root
     #oracle配置

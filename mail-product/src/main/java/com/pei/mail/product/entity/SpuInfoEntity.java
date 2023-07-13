@@ -1,19 +1,20 @@
 package com.pei.mail.product.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.math.BigDecimal;
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * spu信息
  * 
- * @author PEIGEN
- * @email PEIGEN@163.com
- * @date 2023-03-07 21:24:58
+ * @author 夏沫止水
+ * @email HeJieLin@gulimall.com
+ * @date 2020-05-22 19:00:18
  */
 @Data
 @TableName("pms_spu_info")
@@ -41,6 +42,13 @@ public class SpuInfoEntity implements Serializable {
 	 * 品牌id
 	 */
 	private Long brandId;
+
+	/**
+	 * 品牌名
+	 */
+	@TableField(exist = false)
+	private String brandName;
+
 	/**
 	 * 
 	 */

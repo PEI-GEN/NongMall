@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @Description:
  * @Created: with IntelliJ IDEA.
- * @author: 夏沫止水
+ * @author: PEIGEN
  * @createTime: 2020-06-12 18:07
  **/
 
@@ -30,10 +30,11 @@ public class SearchController {
      */
     @GetMapping("/list.html")
     public String listPage(SearchParam param, Model model, HttpServletRequest request) {
-
         param.set_queryString(request.getQueryString());
+
 //        1、根据传递来的页面的查询参数，去es中检索商品
         SearchResult result=mallSearchService.search(param);
+
         model.addAttribute("result",result);
         return "index";
     }

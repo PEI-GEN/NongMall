@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @MapperScan("com.pei.mail.product.dao")
 public class MybatisConfig {
-
     @Bean
     public PaginationInterceptor mybatisPlusInterceptor() {
         PaginationInterceptor interceptor = new PaginationInterceptor();

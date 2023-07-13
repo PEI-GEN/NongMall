@@ -2,18 +2,17 @@ package com.pei.mail.order.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.math.BigDecimal;
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * 订单项信息
  * 
- * @author PEIGEN
- * @email PEIGEN@163.com
- * @date 2023-03-07 21:03:33
+ * @author 夏沫止水
+ * @email HeJieLin@gulimall.com
+ * @date 2020-05-22 19:49:53
  */
 @Data
 @TableName("oms_order_item")

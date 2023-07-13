@@ -97,6 +97,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberDao, MemberEntity> impl
 
     @Override
     public MemberEntity login(MemberUserLoginVo vo) {
+        //从传过来的数据中获取数据和密码
         String loginacct = vo.getLoginacct();
         String password = vo.getPassword();
 

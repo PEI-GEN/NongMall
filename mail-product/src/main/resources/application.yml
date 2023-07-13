@@ -45,7 +45,7 @@ server:
 
 logging:
   level:
-    com.xunqi.gulimall: error
+    com.pei.mail: error
     com.alibaba.nacos.client.naming: error
 
 #线程配置

@@ -12,7 +12,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 /**
  * @Description: 自定义注解规则
  * @Created: with IntelliJ IDEA.
- * @author: 夏沫止水
+ * @author: PEIGEN
  * @createTime: 2020-05-27 17:48
  **/
 
