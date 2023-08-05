@@ -1,10 +1,10 @@
 # 项目概述
 
-#### 介绍
+### 介绍
 该项目是一款前后端分离的商城项目，支持商户上传商品、设置库存、设置价格和库存等功能，也支持用户登录注册，查看、购买商品等功能。
-#### 技术栈
+### 技术栈
 `SpringBoot` `Spring Cloud` `Mybatis` `MySQL` `Redis` `RocketMQ` `Docker` `Nginx` `Nacos`
-#### 项目实现
+### 项目实现
 01.docker构建mysql、redis等中间件
 02.使用nacos做服务注册发现
 03.使用openfeign远程调用
