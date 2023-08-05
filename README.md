@@ -1,37 +1,54 @@
-# 商城
+# 项目概述
 
 #### 介绍
-red book
+该项目是一款前后端分离的商城项目，支持商户上传商品、设置库存、设置价格和库存等功能，也支持用户登录注册，查看、购买商品等功能。
+#### 技术栈
+`SpringBoot` `Spring Cloud` `Mybatis` `MySQL` `Redis` `RocketMQ` `Docker` `Nginx` `Nacos`
+#### 项目实现
+01.docker构建mysql、redis等中间件
+02.使用nacos做服务注册发现
+03.使用openfeign远程调用
+04.网关
+05.跨域问题
+06.接入阿里云OSS服务
+07.统一异常处理
+08.MyBatis分页插件的使用
+09.ElasticSearch
+10.nginx的使用
+11.性能分析以及压测
+12.redis缓存、redisson分布式锁、SpringCache
+13.异步、商品详情：使用线程池解决查询商品信息问题
+14.认证服务：接入第三方API-短信服务、解决认证服务中Session不共享
+15.社交登录问题
+16.单点登录问题
+17.拦截器的使用：登录拦截问题
+18.使用RabbitMQ：解决库存以及订单的自动解锁
+逻辑：
 
-#### 软件架构
-软件架构说明
+订单创建逻辑：创建订单 — 成功 将订单发送给creat队列 — 监听队列 — 服务器接收队列消息并创建订单
+
+​						   订单过期 — 将该订单发送给release队列 — 监听队列 — 服务器接收队列消息并释放订单
+
+库存扣减逻辑：订单创建成功 — 将锁定库存的工作单发送给消息队列 — 监听队列 — 服务器接收队列消息并扣减库存
+
+​						   订单未支付，锁定的库存需要释放 — 将该订单发送给release队列 — 监听队列 — 服务器接收队列消息并释放库存
+
+19.订单服务：接口幂等性、放重令牌
+20.分布式事务：Seata的使用
+21.订单任务：商品定时上架
+22.使用RabbitMQ进行流量削峰
+23.sentinel的使用
+24.链路追踪
+### 我的实现
+  1. 与团队合作设计农易贩**系统架构**，使用SpringBoot、Mybatis等框架搭建网关、认证和订单模块，并参与业务功能开发。
+  2. 负责搭建网关模块，使用**Spring Cloud Gateway**作为API网关，实现路由转发和访问控制，提高安全性和系统维护性。
+  3. 负责将所有服务配置到**Nacos注册中心**，以便实现服务的**远程调用**和**动态配置**。
+  4. 为了明确接口的返回，自定义统一的错误码，并封装了**全局异常处理器**，从而规范了异常返回、屏蔽了项目冗余的报错细节。
+  5. 负责开发认证模块基本功能，并接入第三方API：在注册服务中接入**阿里云短信服务**，在登录服务中接入**微博登录**。
+  6. 1. 使用**SpringSession**解决认证模块中的Session不共享问题，扩大Cookie作用域，实现跨子域名共享Session会话数据。
+  7. 基于**HandlerInterceptor**和**ThreadLocal**完成订单模块登录拦截功能的实现，保证系统的安全性。
+  8. 使用多线程机制并基于**CompletableFuture**，完成订单页面异步查询商品所有属性和信息的功能，使订单查询速度从原来的 22 ms降到 12 ms，查询速度提升了约45%。
+  9. 为解决过期订单的释放问题，负责使用**RocketMQ**消息队列处理过期消息，同时解决消息丢失问题。实现了订单处理的异步功能，避免了线程阻塞。
+  10. 采用 Nginx 完成前端项目部署、采用 Docker 容器完成后端项目部署。
 
 
-#### 安装教程
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 使用说明
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
-
-
-#### 特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
